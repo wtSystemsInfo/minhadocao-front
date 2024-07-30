@@ -29,7 +29,7 @@ const CadastroGato: React.FC = () => {
 
 
   useEffect(() => {
-    console.log('ID da URL:', id); // Verifique o valor do ID
+    console.log('ID da URL:', id); 
   
     if (id) {
       const fetchGato = async () => {

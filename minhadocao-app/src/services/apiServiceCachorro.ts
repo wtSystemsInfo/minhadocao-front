@@ -58,7 +58,6 @@ export const findCachorroById = async (id: string): Promise<CachorroResponseDTO>
         return response.data;
     } catch (error) {
         console.error('Erro ao localizar cachorro pelo ID:', error);
-        // É importante lançar o erro novamente para que o código chamador possa lidar com ele
         throw error;
     }
 };

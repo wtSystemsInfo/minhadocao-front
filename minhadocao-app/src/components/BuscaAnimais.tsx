@@ -72,14 +72,17 @@ const BuscaAnimais: React.FC = () => {
 
   const handleStatusChange = async (animalId: number, currentStatus: string) => {
     try {
-        const newStatus = currentStatus === 'DISPONIVEL' ? 'ADOTADO' : 'DISPONIVEL';
-        await axios.put(`http://localhost:8080/adocao/cachorros/${animalId}/status`, null, {
-            params: {
-                status: newStatus
-            }
-        });
 
-        // Atualiza a lista de animais após a alteração
+
+      const newStatus = currentStatus === 'DISPONIVEL' ? 'ADOTADO' : 'DISPONIVEL';
+      const url = `http://localhost:8080/adocao/${tipoAnimal}s/${animalId}/status`;
+      console.log(`Updating status for ${tipoAnimal} with ID ${animalId}. URL: ${url}`);
+        await axios.put(url, null, {
+          params: {
+              status: newStatus
+          }
+      });
+
         handleBuscar();
     } catch (error) {
         console.error('Erro ao atualizar status do animal:', error);
@@ -197,8 +200,8 @@ const BuscaAnimais: React.FC = () => {
                                         checked={animal.status === 'ADOTADO'}
                                         onChange={() => handleStatusChange(animal.id, animal.status)}
                                     />
-                                    <Link to={`/editar-cachorro/${animal.id}`}>
-                                        <button style={buttonStyle}>Editar</button>
+                                    <Link to={`/${tipoAnimal === 'cachorro' ? 'editar-cachorro' : 'editar-gato'}/${animal.id}`}>
+                                      <button style={buttonStyle}>Editar</button>
                                     </Link>
                                 </div>
                             </li>
